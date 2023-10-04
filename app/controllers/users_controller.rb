@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def create
     @user = User.create!(user_params)
     @token = encode_token({ user_id: @user.id })
-    @refresh_token = SecureRandom.uuid
+    @refresh_token = encode_token({ user_id: @user.id }, expiration = 7.days.from_now.to_i)
     RefreshToken.create(user_id: @user.id, token: @refresh_token, expires_at: 7.days.from_now)
     render json: { user: UserSerializer.new(@user), access_token: @token, refresh_token: @refresh_token }, status: :created
   end
