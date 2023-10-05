@@ -37,4 +37,10 @@ class ApplicationController < ActionController::API
   def authorized
     render json: { message: "Please log in" }, status: :unauthorized unless logged_in?
   end
+
+  private
+
+  def render_unauthorized_entity_response(invalid)
+    render json: { error: "Access denied. You are not authorized to perform this action." }, status: :forbidden
+  end
 end

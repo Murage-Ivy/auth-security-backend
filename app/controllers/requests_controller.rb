@@ -1,7 +1,13 @@
 class RequestsController < ApplicationController
   load_and_authorize_resource
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+  rescue_from CanCan::AccessDenied, with: :render_unauthorized_entity_response
   wrap_parameters format: []
+
+  def index
+    @requests = Request.all
+    render json: @requests, status: :ok
+  end
 
   def create
     @request = Request.create!(request_params)
