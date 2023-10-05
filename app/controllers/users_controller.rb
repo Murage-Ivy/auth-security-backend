@@ -4,7 +4,10 @@ class UsersController < ApplicationController
   wrap_parameters format: []
 
   def create
-    @user = User.create!(user_params)
+    @user = User.create!(user_params.except(:role))
+    if @user.save
+      @user.add_role(user_params[:role])
+    end
     @token = encode_token({ user_id: @user.id })
     @refresh_token = encode_token({ user_id: @user.id }, expiration = 7.days.from_now.to_i)
     RefreshToken.create(user_id: @user.id, token: @refresh_token, expires_at: 7.days.from_now)
@@ -14,7 +17,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:email, :password, :password_confirmation)
+    params.permit(:email, :password, :password_confirmation, :role)
   end
 
   def render_unprocessable_entity_response(invalid)

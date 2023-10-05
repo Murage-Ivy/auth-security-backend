@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_04_151028) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_05_075812) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "content"
+    t.bigint "request_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["request_id"], name: "index_feedbacks_on_request_id"
+    t.index ["user_id"], name: "index_feedbacks_on_user_id"
+  end
 
   create_table "refresh_tokens", force: :cascade do |t|
     t.string "token"
@@ -21,6 +31,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_04_151028) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_refresh_tokens_on_user_id"
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "request"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -48,5 +66,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_04_151028) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "feedbacks", "requests"
+  add_foreign_key "feedbacks", "users"
   add_foreign_key "refresh_tokens", "users"
+  add_foreign_key "requests", "users"
 end
