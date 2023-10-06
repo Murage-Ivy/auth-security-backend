@@ -3,7 +3,6 @@ class User < ApplicationRecord
   rolify
   has_many :refresh_tokens, dependent: :destroy
   has_many :requests, dependent: :destroy
-  has_many :feedbacks, through: :requests
   validates :password, presence: true
   validates :password, length: { minimum: 6 }
   validates :password, confirmation: true

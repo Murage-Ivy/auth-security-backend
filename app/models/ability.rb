@@ -13,11 +13,11 @@ class Ability
       # Students can manage their own requests
       can :manage, [Request]
       can :read, [Feedback]
-      can :read, [Comment]
+      # can :read, [Comment]
     elsif user.has_role?(:facilitator)
       # Facilitators can manage their own requests and feedback
       can :manage, [Request, Feedback]
-      can :read, [Comment]
+      # can :read, [Comment]
     else
       can :read, :all
     end

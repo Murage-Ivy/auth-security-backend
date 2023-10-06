@@ -10,14 +10,14 @@ class RequestsController < ApplicationController
   end
 
   def create
-    @request = Request.create!(request_params)
+    @request = current_user.requests.create!(request_params)
     render json: { request: RequestSerializer.new(@request) }, status: :created
   end
 
   private
 
   def request_params
-    params.permit(:user_id, :request)
+    params.permit(:facilitator_id, :request)
   end
 
   def render_unprocessable_entity_response(invalid)

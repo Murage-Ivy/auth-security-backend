@@ -23,8 +23,4 @@ class FeedbacksController < ApplicationController
   def render_unprocessable_entity_response(invalid)
     render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
   end
-
-  def render_unauthorized_entity_response(invalid)
-    render json: { error: "Access denied. You are not authorized to perform this action." }, status: :forbidden
-  end
 end

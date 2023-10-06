@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   end
 
   post "/login", to: "auth#create"
+  get "/facilitator", to: "facilitators#index"
 end

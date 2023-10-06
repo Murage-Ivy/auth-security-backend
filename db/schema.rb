@@ -10,18 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_05_075812) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_06_182629) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "facilitators", force: :cascade do |t|
+    t.string "email"
+    t.string "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "feedbacks", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.string "content"
     t.bigint "request_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["request_id"], name: "index_feedbacks_on_request_id"
-    t.index ["user_id"], name: "index_feedbacks_on_user_id"
   end
 
   create_table "refresh_tokens", force: :cascade do |t|
@@ -38,6 +43,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_075812) do
     t.string "request"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "facilitator_id"
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
@@ -67,7 +73,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_05_075812) do
   end
 
   add_foreign_key "feedbacks", "requests"
-  add_foreign_key "feedbacks", "users"
   add_foreign_key "refresh_tokens", "users"
   add_foreign_key "requests", "users"
 end
