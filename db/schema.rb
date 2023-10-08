@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_06_182629) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_08_180813) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "request_id", null: false
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["request_id"], name: "index_comments_on_request_id"
+  end
 
   create_table "facilitators", force: :cascade do |t|
     t.string "email"
@@ -72,6 +80,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_06_182629) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "comments", "requests"
   add_foreign_key "feedbacks", "requests"
   add_foreign_key "refresh_tokens", "users"
   add_foreign_key "requests", "users"
