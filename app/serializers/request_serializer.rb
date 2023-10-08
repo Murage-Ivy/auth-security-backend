@@ -7,4 +7,5 @@ class RequestSerializer < ActiveModel::Serializer
   end
 
   has_many :feedbacks
+  has_many :comments
 end

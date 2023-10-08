@@ -30,6 +30,11 @@ class UsersController < ApplicationController
     if user_params[:role].include?("facilitator")
       Facilitator.create(email: user_params[:email], role: user_params[:role])
     end
+
+    if user_params[:role].include?("student")
+      Student.create(email: user_params[:email], role: user_params[:role])
+    end
+
     @token = encode_token({ user_id: @user.id })
     @refresh_token = encode_token({ user_id: @user.id }, expiration = 7.days.from_now.to_i)
     RefreshToken.create(user_id: @user.id, token: @refresh_token, expires_at: 7.days.from_now)
