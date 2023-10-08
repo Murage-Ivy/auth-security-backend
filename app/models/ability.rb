@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Ability
   include CanCan::Ability
 
@@ -14,10 +12,14 @@ class Ability
       can :manage, [Request]
       can :read, [Feedback]
       can :read, [Comment]
+      # Restrict access to the "RestrictedResource" model
+      # Students can't perform any actions on this resource
     elsif user.has_role?(:facilitator)
       # Facilitators can manage their own requests and feedback
       can :manage, [Request, Feedback]
       can :read, [Comment]
+      # Restrict access to the "AnotherRestrictedResource" model
+      # Facilitators can't perform any actions on this resource
     else
       can :read, :all
     end
