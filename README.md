@@ -17,8 +17,4 @@ Things you may want to cover:
 
 * How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![Screenshot from 2023-10-10 09-44-23](https://github.com/Murage-Ivy/auth-security-backend/assets/108492757/98d03118-8446-4521-a3fc-7a7033cc7c40)
