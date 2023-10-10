@@ -17,4 +17,4 @@ Things you may want to cover:
 
 * How to run the test suite
 
-![Screenshot from 2023-10-10 09-44-23](https://github.com/Murage-Ivy/auth-security-backend/assets/108492757/98d03118-8446-4521-a3fc-7a7033cc7c40)
+![Screenshot from 2023-10-10 09-44-23](https://github.com/Murage-Ivy/auth-security-backend/assets/108492757/8fbd9a51-609a-4987-b7b8-a3da3f362bcf)
